@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model Ipo {
+  id          Int       @id @default(autoincrement())
+  company     String
+  slug        String    @unique
+  type        String    // MAINBOARD, SME
+  status      String    // LIVE, UPCOMING, CLOSED, FILED, APPROVED
+  openDate    DateTime?
+  closeDate   DateTime?
+  priceMin    Float?
+  priceMax    Float?
+  lotSize     Int?
+  issueSize   String?
+  listingAt   String?
+  gmp         Float?
+  subscription String?
+  description String?
+  sector      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Broker {
+  id           Int      @id @default(autoincrement())
+  name         String
+  slug         String   @unique
+  type         String   // DISCOUNT, FULL_SERVICE
+  brokerage    String
+  accountOpening String?
+  rating       Float    @default(4.0)
+  features     String?  // JSON string
+  pros         String?
+  cons         String?
+  website      String?
+  featured     Boolean  @default(false)
+  popular      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Ncd {
+  id            Int       @id @default(autoincrement())
+  company       String
+  slug          String    @unique
+  effectiveYield Float?
+  issueDate     DateTime?
+  closeDate     DateTime?
+  minInvestment String?
+  rating        String?
+  status        String    @default("LIVE")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model RightsIssue {
+  id         Int       @id @default(autoincrement())
+  company    String
+  slug       String    @unique
+  recordDate DateTime?
+  issueDate  DateTime?
+  price      Float?
+  ratio      String?
+  status     String    @default("UPCOMING")
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Buyback {
+  id         Int       @id @default(autoincrement())
+  company    String
+  slug       String    @unique
+  issueDate  DateTime?
+  recordDate DateTime?
+  buybackPrice Float?
+  size       String?
+  status     String    @default("UPCOMING")
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Report {
+  id        Int      @id @default(autoincrement())
+  title     String
+  slug      String   @unique
+  category  String   // IPO, BROKER, MARKET, OTHER
+  summary   String?
+  content   String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Alert {
+  id        Int      @id @default(autoincrement())
+  title     String
+  message   String
+  category  String   // IPO, MARKET, NCD, GENERAL
+  alertDate DateTime @default(now())
+  createdAt DateTime @default(now())
+}
+
+model Article {
+  id        Int      @id @default(autoincrement())
+  title     String
+  slug      String   @unique
+  category  String
+  content   String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
