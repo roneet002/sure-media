@@ -1,8 +1,12 @@
 {
-  "name": "chittorgarh-clone",
+  "name": "sure-media",
   "version": "1.0.0",
   "private": true,
   "description": "Sure Media - IPO & Stock Broker Portal",
+  "engines": {
+    "node": ">=20.9.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "npm run dev --prefix backend",
