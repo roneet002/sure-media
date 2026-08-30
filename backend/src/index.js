@@ -14,7 +14,13 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000' }));
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://sure-media.netlify.app',
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
 app.get('/api/health', (_req, res) => {
