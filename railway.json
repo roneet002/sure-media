@@ -5,7 +5,7 @@
     "buildCommand": "DATABASE_URL=file:./data/prod.db npm run install:all && DATABASE_URL=file:./data/prod.db npm run db:generate --prefix backend && npm run build --prefix frontend"
   },
   "deploy": {
-    "startCommand": "mkdir -p backend/prisma/data && npm run db:push --prefix backend && npm run db:seed --prefix backend && npm run start --prefix backend",
+    "startCommand": "mkdir -p backend/prisma/data && DATABASE_URL=file:./data/prod.db npm run db:push --prefix backend && DATABASE_URL=file:./data/prod.db npm run db:seed --prefix backend && DATABASE_URL=file:./data/prod.db npm run start --prefix backend",
     "restartPolicyType": "always",
     "restartPolicyMaxRetries": 5
   }

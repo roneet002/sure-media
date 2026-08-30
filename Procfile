@@ -1,1 +1,1 @@
-web: mkdir -p backend/prisma/data && npm run db:push --prefix backend && npm run db:seed --prefix backend && npm run start --prefix backend
+web: mkdir -p backend/prisma/data && DATABASE_URL=file:./data/prod.db npm run db:push --prefix backend && DATABASE_URL=file:./data/prod.db npm run db:seed --prefix backend && DATABASE_URL=file:./data/prod.db npm run start --prefix backend
