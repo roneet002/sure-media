@@ -296,6 +296,7 @@ async function fetchApi<T>(path: string, options?: RequestInit): Promise<T> {
   try {
     const res = await fetch(`${API_URL}${path}`, {
       ...options,
+      signal: AbortSignal.timeout(8000),
       headers: {
         'Content-Type': 'application/json',
         ...options?.headers,
