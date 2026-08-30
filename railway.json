@@ -2,7 +2,7 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "nixpacks",
-    "buildCommand": "DATABASE_URL=file:./data/prod.db npm run install:all && npm run build --prefix frontend"
+    "buildCommand": "DATABASE_URL=file:./data/prod.db npm run install:all && DATABASE_URL=file:./data/prod.db npm run db:generate --prefix backend && npm run build --prefix frontend"
   },
   "deploy": {
     "startCommand": "npm run db:push --prefix backend && npm run db:seed --prefix backend && npm run dev",
